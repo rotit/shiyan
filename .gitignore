@@ -1,0 +1,42 @@
+#通过修改全局配置 git config 中的 excludesfile 指定全局忽略文件
+#git config --global core.excludesfile ~/.gitignore
+#
+#
+# 忽略*.o和*.a文件
+*.[oa]
+*.cmd
+*.depend
+cscope*
+tags
+si/
+*.mod
+*.mod.*
+*.symvers
+*.order
+*.ko
+app
+!app/
+# 忽略*.b和*.B文件，my.b除外
+#*.[bB]
+#!my.b
+# 忽略dbg文件和dbg目录
+#dbg
+# 只忽略dbg目录，不忽略dbg文件
+#dbg/
+# 只忽略dbg文件，不忽略dbg目录
+#dbg
+#!dbg/
+# 只忽略当前目录下的dbg文件和目录，子目录的dbg不在忽略范围内
+#/dbg
+
+
+#* ？：代表任意的一个字符
+#* ＊：代表任意数目的字符
+#* {!ab}：必须不是此类型
+#* {ab,bb,cx}：代表ab,bb,cx中任一类型即可
+#* [abc]：代表a,b,c中任一字符即可
+
+#* [ ^abc]：代表必须不是a,b,c中任一字符
+#
+#
+#另外 git 还提供了另一种 exclude 的方式来做同样的事情，不同的是 .gitignore 这个文件本身会提交到版本库中去。用来保存的是公共的需要排除的文件。而 .git/info/exclude 这里设置的则是你自己本地需要排除的文件。 他不会影响到其他人。也不会提交到版本库中去。
