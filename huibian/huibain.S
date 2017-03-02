@@ -1,0 +1,6 @@
+	AREA EX,CODE,READONLY
+	ENTRY
+START:
+	ldr R0,=0X91000
+	ldr R1,=[R0],#4
+	END

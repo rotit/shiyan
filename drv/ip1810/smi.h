@@ -44,6 +44,8 @@
 #define EX_PHY_RESET_MUX 		IO_ADDRESS(0xF8A21000+0x120)
 #define EX_PHY_RESET 			IO_ADDRESS(0xF8B2A000)
 
+//phy
+#define GPIO_MII_WRITE_ALL 0
 
 
 
@@ -54,3 +56,4 @@ extern unsigned int me_mdio_wrtie(struct mii_bus *bus, u8 page, u8 regaddr,u16 d
 
 extern unsigned int stmmac_gpio_mdio_read(struct mii_bus *bus, int phyaddr, int phyreg);
 extern void me_mdio_write(struct mii_bus*bus,u8 page,u16 regaddr,u16 value);
+extern unsigned int ip1829_phy_reg_read(u8 phyaddr, u8 phyreg);

@@ -1,4 +1,4 @@
-./mdio.c
-./mdio.h
-./smi.c
-./smi.h
+/shiyan/drv/ip1810/mdio.c
+/shiyan/drv/ip1810/mdio.h
+/shiyan/drv/ip1810/smi.c
+/shiyan/drv/ip1810/smi.h

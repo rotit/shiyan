@@ -376,7 +376,7 @@ unsigned short ic_mdio_rd(unsigned short pa, unsigned short ra){
 	ip1829_gpio_set(GPIO_MDC_OFFSET,1);
 
 	DELAY(1);
-printk("11111111111111 data=0x%x\n",data);
+/*printk("11111111111111 data=0x%x\n",data);*/
 	//while(1);
 	//ssleep(10);
 	/*printk("jinmin test data=%d,data2=%d\n",data,data2);*/
@@ -550,6 +550,39 @@ static void smi_start_read(void)
 }
 
 
+
+ unsigned int ip1829_phy_reg_read(u8 phyaddr, u8 phyreg)
+{
+
+	u16 val,tmp=0;
+	IP2Page(0x3);
+	struct mii_bus * bus=NULL;
+	//printk("jinmin13-1-phyaddr=%x,phyreg=%x\n",phyaddr,phyreg);
+	if(phyaddr>=8)
+	{
+		//page3 0x13,0-4:phy address,9-5:reg,10:write all tp,13-11:reserve,14:0 read/1 write,15:1 start/0 idle
+		//page3 0x14 read back data / data to write
+		val = ( phyaddr<<0 | phyreg <<5 | 1<<15);
+		if(GPIO_MII_WRITE_ALL)
+		val |=(1<<10);
+	
+		me_mdio_write(bus,0x3,0x13,val);
+		do
+		{
+		val=me_mdio_read( bus,0x3,0x14);
+		val=me_mdio_read( bus,0x3,0x14);
+		tmp=me_mdio_read( bus,0x3,0x13);
+			}
+		while( (tmp&(1<<15)) == 1 );
+	//printk("jinmin13-2-phyaddr=%x,phyreg=%x, mii data =%x\n",phyaddr,phyreg,val);	
+		return val;
+	}
+	else
+	{
+		prk("phyaddr error\n");
+		return -1;
+	}
+}
 
 
 
